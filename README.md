@@ -6,8 +6,8 @@ A Nix flake that packages PhotoGIMP customization's for GIMP on Linux, providing
 - Nix package manager with flakes enabled
 
 ## Installation
-[!NOTE]
-This flake is using [NixPak](https://github.com/nixpak/nixpak) for sandboxing GIMP, this means that it will not override an existing GIMP installation. The config directory is `~/.config/PhotoGIMP/$GIMP_VERSION` (currently 3.0)
+> [!NOTE]
+> This flake is using [NixPak](https://github.com/nixpak/nixpak) for sandboxing GIMP, this means that it will not override an existing GIMP installation. The config directory is `~/.config/PhotoGIMP/$GIMP_VERSION` (currently 3.0)
 
 ### Using a NixOs system with flakes
 Add this flake as an Input:
@@ -22,7 +22,7 @@ Add this flake as an Input:
   };
 }
 ```
-Than add it to your `environment.packages` or `home.packages` like so:
+Than add it to your `environment.systemPackages` or `home.packages` like so:
 ```nix
 { inputs, pkgs, ... }: {
   home.packages = [ inputs.nix-photogimp.packages.${pkgs.system}.default ];
