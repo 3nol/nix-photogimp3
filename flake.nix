@@ -45,26 +45,38 @@ rec {
           in
 
           pkgs.stdenv.mkDerivation {
-            name = "photo${gimp3.name}";
-            buildInputs = [ pkgs.makeWrapper ];
+            pname = "photo${gimp3.pname}";
+            inherit (gimp3) version passthru;
+
             dontUnpack = true;
             installPhase = ''
               mkdir -p $out/{bin,share}
-              makeWrapper ${photogimp3-wrapper} $out/bin/gimp
+              install -D ${photogimp3-wrapper} $out/bin/gimp
               cp -r ${photogimp3-files}/.local/share/icons $out/share
               install -D ${photogimp3-desktop}/share/applications/PhotoGIMP.desktop $out/share/applications/PhotoGIMP.desktop
             '';
+
             meta = gimp3.meta // {
               inherit description;
             };
           };
       in
       {
-        packages = with pkgs; {
-          default = self.packages.${system}.photogimp3;
-          photogimp3 = photogimp3-package gimp3;
-          photogimp3-with-plugins = photogimp3-package gimp3-with-plugins;
-        };
+        packages =
+          let
+            default = self.packages.${system}.photogimp3;
+          in
+          {
+            photogimp3 = photogimp3-package pkgs.gimp3;
+            photogimp3-with-plugins =
+              pkgs.callPackage "${pkgs.path}/pkgs/applications/graphics/gimp/wrapper.nix"
+                {
+                  gimpPlugins = pkgs.gimp3Plugins.override {
+                    gimp = default;
+                  };
+                };
+            inherit default;
+          };
       }
     );
 }
