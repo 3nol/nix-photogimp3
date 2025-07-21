@@ -1,5 +1,5 @@
 {
-  description = "Nix Package for PhotoGIMP sandboxed using NixPak";
+  description = "Nix package for PhotoGIMP, based on GIMP 3.";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -40,9 +40,9 @@
             sha256 = "sha256-OLEqtI2Hem2fTTL0KNf0aZsFfuwwhgE4etyRMcW5KiQ=";
           }).outPath;
 
-        desktopItem = pkgs.makeDesktopItem (import ./desktopFile.nix photo-gimp-files);
+        desktopItem = pkgs.makeDesktopItem (import ./photogimp3/desktop.nix photo-gimp-files);
 
-        gimp-wrapper = import ./photo-gimp-install-wrapper.nix {
+        gimp-wrapper = import ./photogimp3/wrapper.nix {
           inherit
             pkgs
             lib
@@ -51,7 +51,7 @@
             ;
         };
 
-        nixpak-wrapper = (mkNixPak (import ./nixPak.nix gimp-wrapper)).config.script;
+        nixpak-wrapper = (mkNixPak (import ./photogimp3/nixpak.nix gimp-wrapper)).config.script;
       in
       {
         packages = {
