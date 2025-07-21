@@ -1,4 +1,4 @@
-{
+rec {
   description = "Nix package for PhotoGIMP, based on GIMP 3.";
 
   inputs = {
@@ -43,8 +43,9 @@
               }
             );
           in
+
           pkgs.stdenv.mkDerivation {
-            name = "photogimp3-package";
+            name = "photo${gimp3.name}";
             buildInputs = [ pkgs.makeWrapper ];
             dontUnpack = true;
             installPhase = ''
@@ -53,7 +54,9 @@
               cp -r ${photogimp3-files}/.local/share/icons $out/share
               install -D ${photogimp3-desktop}/share/applications/PhotoGIMP.desktop $out/share/applications/PhotoGIMP.desktop
             '';
-            inherit (gimp3) meta;
+            meta = gimp3.meta // {
+              inherit description;
+            };
           };
       in
       {
