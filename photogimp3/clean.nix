@@ -1,4 +1,7 @@
 { pkgs, ... }:
+let
+  gimp3-version = pkgs.lib.versions.majorMinor pkgs.gimp3.version;
+in
 pkgs.writeShellApplication {
   name = "photo${pkgs.gimp3.pname}-clean";
   runtimeInputs = with pkgs; [
@@ -8,8 +11,8 @@ pkgs.writeShellApplication {
   ];
 
   text = ''
-    cfg="''${XDG_CONFIG_HOME:-$HOME/.config}/GIMP/3.0"
-    cache="''${XDG_CACHE_HOME:-$HOME/.cache}/gimp/3.0"
+    cfg="''${XDG_CONFIG_HOME:-$HOME/.config}/GIMP/${gimp3-version}"
+    cache="''${XDG_CACHE_HOME:-$HOME/.cache}/gimp/${gimp3-version}"
     legacy="$HOME/.gimp"
     temporary="''${TMPDIR:-/tmp}/gimp"
 
