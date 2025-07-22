@@ -46,9 +46,12 @@ First, reference this flake as an input.
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    flake-utils.url = "github:numtide/flake-utils";
+
     nix-photogimp3 = {
       url = "github:3nol/nix-photogimp3";
       inputs.nixpkgs.follows = "nixpkgs";
+      inputs.flake-utils.follows = "flake-utils";
     };
   };
 }
@@ -72,10 +75,10 @@ nix profile install github:3nol/nix-photogimp3
 
 ## Attribution
 
-1. PhotoGIMP itself by [Diolinux](https://github.com/Diolinux).
+1. PhotoGIMP itself was created by [Diolinux](https://github.com/Diolinux).
 
 2. Adapted from [aloshy-ai/nix-photogimp](https://github.com/aloshy-ai/nix-photogimp), 
 if you're running Darwin, that is the flake for you (only GIMP 2 at the moment).
 
 3. Forked from [Libadoxon/nix-photo-gimp](https://github.com/Libadoxon/nix-photo-gimp), 
-if you want to use [NixPak](https://github.com/nixpak/nixpak), that is the flake for you.
+if you want to use [NixPak](https://github.com/nixpak/nixpak), that is the flake for you (also GIMP 3).
