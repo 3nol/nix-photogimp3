@@ -33,11 +33,13 @@ rec {
           gimp3:
           let
             gimp3-exe = pkgs.lib.getExe gimp3;
+            gimp3-version = pkgs.lib.versions.majorMinor gimp3.version;
             photogimp3-wrapper = pkgs.lib.getExe (
               import ./photogimp3/wrapper.nix {
                 inherit
                   pkgs
                   gimp3-exe
+                  gimp3-version
                   photogimp3-files
                   ;
               }
