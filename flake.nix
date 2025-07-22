@@ -80,11 +80,15 @@ rec {
 
         apps =
           let
-            drv = import ./photogimp3/reset.nix { inherit pkgs; };
+            reset = import ./photogimp3/reset.nix { inherit pkgs; };
+            clean = import ./photogimp3/clean.nix { inherit pkgs; };
           in
           {
             photogimp3-reset = flake-utils.lib.mkApp {
-              inherit drv;
+              drv = reset;
+            };
+            photogimp3-clean = flake-utils.lib.mkApp {
+              drv = clean;
             };
           };
       }
