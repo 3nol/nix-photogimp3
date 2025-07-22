@@ -77,6 +77,16 @@ rec {
                 };
             inherit default;
           };
+
+        apps =
+          let
+            drv = import ./photogimp3/reset.nix { inherit pkgs; };
+          in
+          {
+            photogimp3-reset = flake-utils.lib.mkApp {
+              inherit drv;
+            };
+          };
       }
     );
 }
