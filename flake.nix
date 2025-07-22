@@ -66,10 +66,10 @@ rec {
       {
         packages =
           let
-            default = self.packages.${system}.photogimp3;
+            default = photogimp3-package pkgs.gimp3;
           in
           {
-            photogimp3 = photogimp3-package pkgs.gimp3;
+            photogimp3 = default;
             photogimp3-with-plugins =
               pkgs.callPackage "${pkgs.path}/pkgs/applications/graphics/gimp/wrapper.nix"
                 {
