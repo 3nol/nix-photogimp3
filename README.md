@@ -12,17 +12,17 @@ This repository provides two Nix packages.
 - `packages.${system}.photogimp3-with-plugins`
 
 They should work analogous to `pkgs.gimp3` and `pkgs.gimp3-with-plugins`.
-Note that the plain `photogimp3` package is aliased to `default`, as well.
+The plain `photogimp3` package is aliased to `default`, as well.
 
 ### Apps
 
-Additionally, this repository provides two Nix apps as tooling.
+Additionally, this repository provides two Nix apps for tooling.
 - `nix run .#photogimp3-reset`
 - `nix run .#photogimp3-clean`
 
-They exists for the reason that [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) is _not_ run in a sandbox and,
+They exist for the reason that [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) is **not** run in a sandbox and,
 instead, overwrites "$HOME/.config/GIMP/3.0". Resetting re-initializes this configuration directory with the
-default GIMP 3.0 configuration. Cleaning will purge all XDG base directories of GIMP data.
+default GIMP 3.0 configuration. Cleaning will purge all XDG base directories of GIMP 3.0 data.
 
 ## Prerequisites
 
@@ -64,7 +64,7 @@ Next, add it to your `environment.systemPackages` or `home.packages` like so.
 }
 ```
 
-Finally rebuild, and [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) should be available via NixOS or HomeManager, respectively.
+Rebuild, and [PhotoGIMP](https://github.com/Diolinux/PhotoGIMP) should be available via NixOS or HomeManager.
 
 ### Using Nix profiles
 
