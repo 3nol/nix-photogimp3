@@ -48,7 +48,7 @@ rec {
 
           pkgs.stdenv.mkDerivation {
             pname = "photo${gimp3.pname}";
-            inherit (gimp3) version passthru;
+            inherit (gimp3) version passthru man;
 
             dontUnpack = true;
             installPhase = ''
