@@ -48,14 +48,20 @@ rec {
 
           pkgs.stdenv.mkDerivation {
             pname = "photo${gimp3.pname}";
-            inherit (gimp3) version passthru;
+            inherit (gimp3) version passthru man;
+
+            outputs = [
+              "out"
+              "man"
+            ];
 
             dontUnpack = true;
             installPhase = ''
-              mkdir -p $out/{bin,share}
+              mkdir -p $out/{bin,share} $man/share/man
               install -D ${photogimp3-wrapper} $out/bin/gimp
               cp -r ${photogimp3-files}/.local/share/icons $out/share
               install -D ${photogimp3-desktop}/share/applications/PhotoGIMP.desktop $out/share/applications/PhotoGIMP.desktop
+              ln -s ${gimp3.man}/share/man $man/share/man
             '';
 
             meta = gimp3.meta // {
