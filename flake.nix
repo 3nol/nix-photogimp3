@@ -25,8 +25,8 @@ rec {
           (pkgs.fetchFromGitHub {
             owner = "Diolinux";
             repo = "PhotoGIMP";
-            rev = "af558b2889cd504fb4ed3db06c014cf36a4c8720";
-            sha256 = "sha256-OLEqtI2Hem2fTTL0KNf0aZsFfuwwhgE4etyRMcW5KiQ=";
+            rev = "ca9c6f29f83164967b822a6323bf3921bb079d2d";
+            sha256 = "sha256-WEqOibR+7jAsIBQibHfi586C1bAOau5RHOIgostYTk0=";
           }).outPath;
         photogimp3-desktop = pkgs.makeDesktopItem (import ./photogimp3/desktop.nix photogimp3-files);
         photogimp3-package =
